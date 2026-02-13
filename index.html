@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Choose Your Valentine Card</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+            color: white;
+        }
+
+        .header h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .header p {
+            font-size: 1.3em;
+            opacity: 0.9;
+        }
+
+        .cards-container {
+            display: flex;
+            gap: 40px;
+            flex-wrap: wrap;
+            justify-content: center;
+            max-width: 1200px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 30px;
+            padding: 60px 40px;
+            width: 250px;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 30px;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255, 107, 107, 0.1) 0%, rgba(255, 200, 253, 0.1) 100%);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-15px) scale(1.08);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .card:hover::before {
+            opacity: 1;
+        }
+
+        .card-icon {
+            font-size: 6em;
+            text-align: center;
+            animation: float 3s ease-in-out infinite;
+            z-index: 1;
+        }
+
+        .card:nth-child(1) .card-icon {
+            animation-delay: 0s;
+        }
+
+        .card:nth-child(2) .card-icon {
+            animation-delay: 1.5s;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-25px) rotate(5deg);
+            }
+        }
+
+        .card-button {
+            width: 100%;
+            padding: 18px 30px;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.3em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            z-index: 1;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .card:nth-child(1) .card-button {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ff8e8e 100%);
+            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
+        }
+
+        .card:nth-child(1) .card-button:hover {
+            background: linear-gradient(135deg, #ff5252 0%, #ff7575 100%);
+            box-shadow: 0 6px 20px rgba(255, 107, 107, 0.6);
+            transform: scale(1.05);
+        }
+
+        .card:nth-child(2) .card-button {
+            background: linear-gradient(135deg, #ff1493 0%, #ff69b4 100%);
+            box-shadow: 0 4px 15px rgba(255, 20, 147, 0.4);
+        }
+
+        .card:nth-child(2) .card-button:hover {
+            background: linear-gradient(135deg, #ff007f 0%, #ff5aad 100%);
+            box-shadow: 0 6px 20px rgba(255, 20, 147, 0.6);
+            transform: scale(1.05);
+        }
+
+        .card-button:active {
+            transform: scale(0.98);
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2em;
+            }
+
+            .header p {
+                font-size: 1em;
+            }
+
+            .cards-container {
+                gap: 30px;
+            }
+
+            .card {
+                width: 100%;
+                max-width: 250px;
+            }
+
+            .card-icon {
+                font-size: 5em;
+            }
+        }
+
+        .hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 2em;
+            opacity: 0.3;
+            animation: fall 10s linear infinite;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(-10vh) rotate(0deg);
+                opacity: 0.3;
+            }
+            100% {
+                transform: translateY(110vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="hearts" id="hearts"></div>
+
+    <div class="header">
+        <h1>💝 Choose Your Valentine Experience Chanchal 💝</h1>
+    </div>
+
+    <div class="cards-container">
+        <div class="card" onclick="selectCard('card1')">
+            <div class="card-icon">🎀</div>
+            <button class="card-button">Choose Me</button>
+        </div>
+
+        <div class="card" onclick="selectCard('card2')">
+            <div class="card-icon">💌</div>
+            <button class="card-button">Pick Me</button>
+        </div>
+    </div>
+
+    <script>
+        function selectCard(cardType) {
+            const cards = document.querySelectorAll('.card');
+            cards.forEach(card => {
+                card.style.transform = 'scale(0)';
+                card.style.opacity = '0';
+            });
+
+            setTimeout(() => {
+                window.location.href = `${cardType}/index.html`;
+            }, 300);
+        }
+
+        function createHearts() {
+            const heartsContainer = document.getElementById('hearts');
+            const heartSymbols = ['❤️', '💕', '💖', '💗', '💝'];
+
+            for (let i = 0; i < 15; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.textContent = heartSymbols[Math.floor(Math.random() * heartSymbols.length)];
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.animationDuration = (Math.random() * 5 + 8) + 's';
+                heart.style.animationDelay = Math.random() * 5 + 's';
+                heartsContainer.appendChild(heart);
+            }
+        }
+
+        createHearts();
+    </script>
+</body>
+</html>
